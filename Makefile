@@ -49,6 +49,14 @@ $(NODEUNIT): | $(NPM_EXEC)
 $(NODECOVER): | $(NPM_EXEC)
 	$(NPM) install
 
+.PHONY: style
+style: $(ESLINT)
+	NO_LINT=true $(ESLINT) $(JS_FILES)
+
+.PHONY: lint
+lint: $(ESLINT)
+	NO_STYLE=true $(ESLINT) $(JS_FILES)
+
 .PHONY: cover
 cover: $(NODECOVER)
 	@rm -fr ./.coverage_data
